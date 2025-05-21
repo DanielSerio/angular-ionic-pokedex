@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
@@ -14,11 +14,9 @@ import { NavigationState } from '#types/state/navigation-state.types';
   styleUrls: ['./browse.page.scss'],
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, TitleKababPipe],
-  providers: [
-    TitleCasePipe
-  ]
+
 })
-export class BrowsePage implements OnInit {
+export class BrowsePage implements OnInit, OnDestroy {
   response!: BrowseResponse;
   responseKeys!: (keyof BrowseResponse)[];
 
@@ -35,6 +33,10 @@ export class BrowsePage implements OnInit {
     this.subscription.add(this.subscriber$Response());
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   private subscriber$Response() {
     return this.apiService.browseResponse$.subscribe((res) => {
       this.response = res;
@@ -42,13 +44,10 @@ export class BrowsePage implements OnInit {
     });
   }
 
-  onItemClick(url: string) {
-    // Get the local path from the api endpoint. (could be different from key in a future version)
-    const localPath = url.replace('https://pokeapi.co/api/v2', '');
-
-    this.navCtrl.navigateForward(localPath, {
+  onItemClick(key: keyof BrowseResponse) {
+    this.navCtrl.navigateForward('list-view', {
       state: {
-        endpoint: localPath
+        nameKey: key
       } satisfies NavigationState
     });
   }

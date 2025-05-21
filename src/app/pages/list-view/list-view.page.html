@@ -1,13 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>list-view</ion-title>
+    <ion-back-button slot="start" defaultHref="/browse"></ion-back-button>
+    <ion-title>{{state.nameKey}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">list-view</ion-title>
+      <ion-title size="large">{{state.nameKey | titleKabab}}</ion-title>
     </ion-toolbar>
   </ion-header>
 </ion-content>

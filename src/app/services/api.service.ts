@@ -12,6 +12,7 @@ export class ApiService {
   private _BASE_URL = 'https://pokeapi.co/api/v2';
 
   browseResponse$!: Observable<BrowseResponse>;
+  listResponse$!: Observable<ListResponse<object | undefined>>;
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
@@ -27,7 +28,7 @@ export class ApiService {
     return ~~n;
   }
   private getValidLimit(n?: number) {
-    return this.getValidInt(n, 1, 25);
+    return this.getValidInt(n, 1, 100_000);
   }
 
   private getValidOffset(n?: number) {
@@ -69,7 +70,15 @@ export class ApiService {
 
     const query = new URLSearchParams(config);
 
-    return this.http.get<ListResponse<ExtendedItem>>(`${this._BASE_URL}/${endpoint}?${query.toString()}`);
+    console.info(`${this._BASE_URL}/${endpoint}?${query.toString()}`);
+
+    this.loadingService.present('list');
+    this.listResponse$ = this.http.get<ListResponse<ExtendedItem>>(`${this._BASE_URL}/${endpoint}?${query.toString()}`).pipe(
+      delay(500),
+      finalize(() => {
+        this.loadingService.dismiss('list');
+      })
+    );
   }
 
   /**

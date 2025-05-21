@@ -1,3 +1,5 @@
+import { BrowseResponse } from "#types/browse.types";
+
 export interface NavigationState {
-  endpoint: string;
+  nameKey: keyof BrowseResponse;
 }

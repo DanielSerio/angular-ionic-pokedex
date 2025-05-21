@@ -16,7 +16,7 @@
   <ion-list>
     @for (key of responseKeys; track key) {
 
-    <ion-item button detail lines="full" (click)="onItemClick(response[key])">
+    <ion-item button detail lines="full" (click)="onItemClick(key)">
       <ion-text>{{key | titleKabab}}</ion-text>
     </ion-item>
 
