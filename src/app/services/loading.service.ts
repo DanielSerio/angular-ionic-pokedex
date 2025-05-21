@@ -40,6 +40,7 @@ export class LoadingService {
 
     try {
       await this.loadingCtrl.dismiss(null, 'dismiss', id);
+      this.instance = null;
 
       console.info(`Dismissed loading modal${id ? `: '${id}'` : ''}`);
     } catch {

@@ -1,13 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>details-view</ion-title>
+    <ion-back-button slot="start" defaultHref="/list-view"></ion-back-button>
+    <ion-title>{{title}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">details-view</ion-title>
+      <ion-title>{{title}}</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  @switch (state.nameKey) { @case ('egg-group') {
+  @if(ResponseValidator.isEggGroup(detailsResponse)) {
+  <app-egg-group [data]="detailsResponse"></app-egg-group>
+  } } @default {
+
+  <ion-text></ion-text>
+
+  } }
 </ion-content>

@@ -1,7 +1,7 @@
 import { NamedItem } from "#types/list.types";
 
 export class ApiHelpers {
-  private getIDFromURL(url: string): number {
+  private static getIDFromURL(url: string): number {
     const matches = `${url}`.replace(/\/$/, '').match(/\d+$/) ?? [];
 
     // will never happen, but lets make typescript happy
@@ -22,7 +22,7 @@ export class ApiHelpers {
    * of the input `item` object, along with an additional `id` property that is obtained by calling the
    * `getIDFromURL` method with the `url` property of the `item` object.
    */
-  public getExtendedNamedItem<T extends object | undefined>(item: NamedItem<T>) {
+  public static getExtendedNamedItem<T extends object | undefined>(item: NamedItem<T>) {
     return ({
       ...item,
       id: this.getIDFromURL(item.url)

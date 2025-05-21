@@ -13,6 +13,7 @@ export class ApiService {
 
   browseResponse$!: Observable<BrowseResponse>;
   listResponse$!: Observable<ListResponse<object | undefined>>;
+  detailsResponse$!: Observable<unknown>;
 
   constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
@@ -90,7 +91,13 @@ export class ApiService {
    * @returns The `getEntity` method is returning an HTTP GET request to a specific endpoint with a given
    * ID, and it expects a response of type `T`.
    */
-  public getEntity<T>(endpoint: keyof BrowseResponse, id: number) {
-    return this.http.get<T>(`${this._BASE_URL}/${endpoint}/${id}`);
+  public getDetails<T>(endpoint: keyof BrowseResponse, id: number) {
+    this.loadingService.present(`details-${endpoint}-${id}`);
+    this.detailsResponse$ = this.http.get<T>(`${this._BASE_URL}/${endpoint}/${id}`).pipe(
+      delay(500), // Loading too quick. simulate lag for demo purposes
+      finalize(() => {
+        this.loadingService.dismiss(`details-${endpoint}-${id}`);
+      })
+    );
   }
 }
