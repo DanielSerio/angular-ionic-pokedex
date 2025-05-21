@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>browse</ion-title>
+    <ion-title>Browse</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">browse</ion-title>
+      <ion-title size="large">Browse</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -15,9 +15,11 @@
 
   <ion-list>
     @for (key of responseKeys; track key) {
-    <ion-item>
-      <ion-text>{{key}}</ion-text>
+
+    <ion-item button detail lines="full" (click)="onItemClick(response[key])">
+      <ion-text>{{key | titleKabab}}</ion-text>
     </ion-item>
+
     }
   </ion-list>
 
