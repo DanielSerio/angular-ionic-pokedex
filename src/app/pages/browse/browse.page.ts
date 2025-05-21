@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { ApiService } from '#services/api.service';
 
 @Component({
   selector: 'app-browse',
@@ -11,8 +12,11 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class BrowsePage implements OnInit {
+  response$;
 
-  constructor() { }
+  constructor(private apiService: ApiService) {
+    this.response$ = apiService.getBrowseMenu();
+  }
 
   ngOnInit() {
   }
