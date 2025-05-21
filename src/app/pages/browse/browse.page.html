@@ -10,5 +10,16 @@
       <ion-title size="large">browse</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div>{{response$ | async | json}}</div>
+
+  @if (response) {
+
+  <ion-list>
+    @for (key of responseKeys; track key) {
+    <ion-item>
+      <ion-text>{{key}}</ion-text>
+    </ion-item>
+    }
+  </ion-list>
+
+  }
 </ion-content>

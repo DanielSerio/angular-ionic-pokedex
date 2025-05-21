@@ -2,6 +2,8 @@ import { BrowseResponse } from '#types/browse.types';
 import { ListOptions, ListResponse } from '#types/list.types';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LoadingService } from './loading.service';
+import { delay, finalize, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,9 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   private _BASE_URL = 'https://pokeapi.co/api/v2';
 
-  constructor(private http: HttpClient) { }
+  browseResponse$!: Observable<BrowseResponse>;
+
+  constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
   private getValidInt(n?: number, min: number = 0, defaultTo: number = 0) {
     if (n === undefined) {
@@ -36,7 +40,13 @@ export class ApiService {
    * response of type `BrowseResponse`.
    */
   public getBrowseMenu() {
-    return this.http.get<BrowseResponse>(`${this._BASE_URL}`);
+    this.loadingService.present('browse');
+    this.browseResponse$ = this.http.get<BrowseResponse>(`${this._BASE_URL}`).pipe(
+      delay(500), // Loading too quick. simulate lag for demo purposes
+      finalize(() => {
+        this.loadingService.dismiss('browse');
+      })
+    );
   }
 
   /**
