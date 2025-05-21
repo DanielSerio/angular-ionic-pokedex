@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { NavigationState } from '#types/state/navigation-state.types';
+import { DetailNavigationState, NavigationState } from '#types/state/navigation-state.types';
 import { TitleKababPipe } from '#pipes/title-kabab.pipe';
 import { ApiService } from '#services/api.service';
 import { ListResponse } from '#types/list.types';
@@ -24,7 +24,8 @@ export class ListViewPage implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private navCtrl: NavController
   ) {
     this.apiService.getList(this.state.nameKey);
   }
@@ -40,6 +41,17 @@ export class ListViewPage implements OnInit, OnDestroy {
   private subscriber$ListResponse() {
     return this.apiService.listResponse$.subscribe((res) => {
       this.listResponse = res;
+    });
+  }
+
+  goToDetails(item: { url: string; } & Record<string, any>) {
+    const state: DetailNavigationState & typeof item = {
+      nameKey: this.state.nameKey,
+      ...item
+    };
+
+    this.navCtrl.navigateForward('/details-view', {
+      state
     });
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { DetailNavigationState } from '#types/state/navigation-state.types';
 
 @Component({
   selector: 'app-details-view',
@@ -11,8 +13,9 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
   imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class DetailsViewPage implements OnInit {
+  state = this.router.getCurrentNavigation()!.extras.state as DetailNavigationState;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

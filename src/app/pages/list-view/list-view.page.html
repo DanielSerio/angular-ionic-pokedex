@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button slot="start" defaultHref="/browse"></ion-back-button>
-    <ion-title>{{state.nameKey}}</ion-title>
+    <ion-title>{{state.nameKey | titleKabab}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,4 +11,20 @@
       <ion-title size="large">{{state.nameKey | titleKabab}}</ion-title>
     </ion-toolbar>
   </ion-header>
+  @if (listResponse) {
+
+  <ion-list>
+    @for( item of listResponse.results; track item.url;) {
+
+    <ion-item detail button lines="full" (click)="goToDetails(item)">
+      <ion-text>
+        {{!item.name ? (state.nameKey | titleKabab) + ` #${$index + 1}` :
+        item.name | titleKabab}}</ion-text
+      >
+    </ion-item>
+
+    }
+  </ion-list>
+
+  }
 </ion-content>
