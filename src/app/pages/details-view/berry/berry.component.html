@@ -1,1 +1,38 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h2>Stats</h2>
+      <app-stat-table-row
+        label="Firmness"
+        [value]="data.firmness.name | titleKabab"
+      ></app-stat-table-row>
+      <app-stat-table-row
+        label="Growth Time"
+        [value]="data.growth_time"
+      ></app-stat-table-row>
+      <app-stat-table-row
+        label="Max Harvest"
+        [value]="data.max_harvest"
+      ></app-stat-table-row>
+      <app-stat-table-row label="Size" [value]="data.size"></app-stat-table-row>
+      <app-stat-table-row
+        label="Smoothness"
+        [value]="data.smoothness"
+      ></app-stat-table-row>
+      <app-stat-table-row
+        label="Soil Dryness"
+        [value]="data.soil_dryness"
+      ></app-stat-table-row>
+      <app-stat-table-row
+        label="Natural Gift Type"
+        [value]="data.natural_gift_type.name | titleKabab"
+      ></app-stat-table-row>
+      <app-stat-table-row
+        label="Natural Gift Power"
+        [value]="data.natural_gift_power"
+      ></app-stat-table-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
 <app-berry-flavor-profile [profile]="flavorProfile"></app-berry-flavor-profile>

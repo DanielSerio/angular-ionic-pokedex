@@ -1,0 +1,18 @@
+ion-row {
+  font-size: 0.8em;
+}
+
+ion-col {
+  &.label {
+    font-weight: 900;
+    opacity: 0.9;
+  }
+
+  &.value {
+    &.muted {
+      opacity: 0.45;
+    }
+
+    text-align: right;
+  }
+}
