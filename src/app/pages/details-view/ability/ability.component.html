@@ -1,0 +1,44 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h2>Names</h2>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <app-name-list [names]="data.names"></app-name-list>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <h3>Effect</h3>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-text>{{ effectEntry?.effect }}</ion-text>
+    </ion-col>
+  </ion-row>
+
+  @if (effectChangeEntries && effectChangeEntries.length) {
+  <ion-row>
+    <ion-col>
+      <h4>Effect Change Entries</h4>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        @for (entry of effectChangeEntries; track entry.effect) {
+
+        <ion-item lines="full">
+          <ion-text>{{ entry.effect }}</ion-text>
+        </ion-item>
+
+        }
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+  }
+</ion-grid>

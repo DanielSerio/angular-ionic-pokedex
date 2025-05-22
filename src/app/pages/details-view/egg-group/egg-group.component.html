@@ -1,12 +1,1 @@
-<ion-list>
-  @for(name of data.names; track name.name) {
-
-  <ion-item lines="full">
-    <div slot="start" class="lang-space">
-      <ion-badge>{{ name.language.name }}</ion-badge>
-    </div>
-    <ion-text>{{ name.name }}</ion-text>
-  </ion-item>
-
-  }
-</ion-list>
+<app-name-list [names]="data.names"></app-name-list>

@@ -15,6 +15,8 @@
   @switch (state.nameKey) { @case ('egg-group') {
   @if(ResponseValidator.isEggGroup(detailsResponse)) {
   <app-egg-group [data]="detailsResponse"></app-egg-group>
+  } } @case ('ability') { @if (ResponseValidator.isAbility(detailsResponse)) {
+  <app-ability [data]="detailsResponse"></app-ability>
   } } @default {
 
   <ion-text></ion-text>

@@ -9,13 +9,14 @@ import { ApiHelpers } from '#utilities/api.helpers';
 import { Subscription } from 'rxjs';
 import { EggGroupComponent } from "./egg-group/egg-group.component";
 import { ResponseValidation } from '#utilities/response.validation';
+import { AbilityComponent } from './ability/ability.component';
 
 @Component({
   selector: 'app-details-view',
   templateUrl: './details-view.page.html',
   styleUrls: ['./details-view.page.scss'],
   standalone: true,
-  imports: [IonBackButton, IonText, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, EggGroupComponent]
+  imports: [IonBackButton, IonText, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, EggGroupComponent, AbilityComponent]
 })
 export class DetailsViewPage implements OnInit, OnDestroy {
   state = this.router.getCurrentNavigation()!.extras.state as DetailNavigationState;

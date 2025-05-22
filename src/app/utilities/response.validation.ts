@@ -1,3 +1,4 @@
+import { PokemonAbility } from "#types/entity/ability.types";
 import { EggGroup } from "#types/entity/egg-group.types";
 
 export class ResponseValidation {
@@ -27,6 +28,37 @@ export class ResponseValidation {
     }
 
     return false;
+  }
+
+  private static isValidName(value?: unknown): boolean {
+    return typeof value === 'string' && value.length > 0;
+  }
+
+  public static isAbility(value: unknown): value is PokemonAbility {
+    if (typeof value !== 'object' || value === null) {
+      return false;
+    }
+
+    const casted = value as PokemonAbility;
+    const tests = [
+      [[casted.id], this.isValidNumberID],
+      [[casted.names], this.isValidArray],
+      [[casted.effect_changes], this.isValidArray],
+      [[casted.effect_entries], this.isValidArray],
+      [[casted.flavor_text_entries], this.isValidArray],
+      [[casted.pokemon], this.isValidArray],
+      [[casted.generation.name], this.isValidName]
+    ] as const;
+
+    for (const [params, validator] of tests) {
+      const isValid = validator(...params);
+
+      if (!isValid) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public static isEggGroup(value: unknown): value is EggGroup {
