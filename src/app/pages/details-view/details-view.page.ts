@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonText, IonBackButton } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DetailNavigationState } from '#types/state/navigation-state.types';
 import { ApiService } from '#services/api.service';
@@ -10,13 +10,21 @@ import { Subscription } from 'rxjs';
 import { EggGroupComponent } from "./egg-group/egg-group.component";
 import { ResponseValidation } from '#utilities/response.validation';
 import { AbilityComponent } from './ability/ability.component';
+import { BerryComponent } from './berry/berry.component';
 
 @Component({
   selector: 'app-details-view',
   templateUrl: './details-view.page.html',
   styleUrls: ['./details-view.page.scss'],
   standalone: true,
-  imports: [IonBackButton, IonText, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, EggGroupComponent, AbilityComponent]
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    EggGroupComponent,
+    AbilityComponent,
+    BerryComponent
+  ]
 })
 export class DetailsViewPage implements OnInit, OnDestroy {
   state = this.router.getCurrentNavigation()!.extras.state as DetailNavigationState;

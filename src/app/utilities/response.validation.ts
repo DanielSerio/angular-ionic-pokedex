@@ -1,7 +1,12 @@
 import { PokemonAbility } from "#types/entity/ability.types";
+import { Berry } from "#types/entity/berry.types";
 import { EggGroup } from "#types/entity/egg-group.types";
 
 export class ResponseValidation {
+  private static isValidNumber(value?: unknown): value is number {
+    return typeof value === 'number' && !isNaN(value);
+  }
+
   private static isValidNumberID(value?: unknown): boolean {
     if (typeof value === 'number') {
       return value >= 1 && value % 1 === 0;
@@ -48,6 +53,30 @@ export class ResponseValidation {
       [[casted.flavor_text_entries], this.isValidArray],
       [[casted.pokemon], this.isValidArray],
       [[casted.generation.name], this.isValidName]
+    ] as const;
+
+    for (const [params, validator] of tests) {
+      const isValid = validator(...params);
+
+      if (!isValid) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  public static isBerry(value: unknown): value is Berry {
+    if (typeof value !== 'object' || value === null) {
+      return false;
+    }
+
+    const casted = value as Berry;
+    const tests = [
+      [[casted.id], this.isValidNumberID],
+      [[casted.growth_time], this.isValidNumber],
+      [[casted.firmness], this.isValidArray],
+      [[casted.flavors], this.isValidArray],
     ] as const;
 
     for (const [params, validator] of tests) {

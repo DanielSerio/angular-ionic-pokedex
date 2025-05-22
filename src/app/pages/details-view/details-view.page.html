@@ -17,6 +17,8 @@
   <app-egg-group [data]="detailsResponse"></app-egg-group>
   } } @case ('ability') { @if (ResponseValidator.isAbility(detailsResponse)) {
   <app-ability [data]="detailsResponse"></app-ability>
+  } } @case ('berry') { @if (ResponseValidator.isBerry(detailsResponse)) {
+  <app-berry [data]="detailsResponse"></app-berry>
   } } @default {
 
   <ion-text></ion-text>
