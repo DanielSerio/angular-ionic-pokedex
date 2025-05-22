@@ -2,7 +2,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { NameListComponent } from "#components/name-list/name-list.component";
-import { AbilityEffectChangeEntry, AbilityEffectEntry, PokemonAbility } from '#types/entity/ability.types';
+import { AbilityEffectChangeEntry, AbilityEffectEntry, AbilityFlavorTextEntry, PokemonAbility } from '#types/entity/ability.types';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -18,26 +18,33 @@ export class AbilityComponent implements OnInit {
   lang = 'en';
   effectChangeEntries!: AbilityEffectChangeEntry[];
   effectEntry: AbilityEffectEntry | null = null;
-
-  b = this.data.flavor_text_entries;
+  textEntry: AbilityFlavorTextEntry | null = null;
 
   ngOnInit() {
     this.effectChangeEntries = this.getEffectChangeEntries();
     this.effectEntry = this.getEffectEntry();
+    this.textEntry = this.getTextEntry();
   }
 
-  findEffectChangeByLanguage() {
+  private isSelectedLanguage = ({ language }: Record<string, any>) => {
+    return language.name === this.lang;
+  };
+
+  private findEffectChangeByLanguage() {
     return this.data.effect_changes
       .find(({ effect_entries }) => {
-        return effect_entries.find(({ language }) => language.name === this.lang) ?? null;
+        return effect_entries.find(this.isSelectedLanguage) ?? null;
       });
   }
 
-  findEffectEntriesByLanguage() {
+  private findEffectEntriesByLanguage() {
     return this.data.effect_entries
-      .find(({ language }) => {
-        return language.name === this.lang;
-      }) ?? null;
+      .find(this.isSelectedLanguage) ?? null;
+  }
+
+  private findTextEntryByLanguage() {
+    return this.data.flavor_text_entries
+      .find(this.isSelectedLanguage) ?? null;
   }
 
   getEffectChangeEntries(): AbilityEffectChangeEntry[] {
@@ -52,5 +59,9 @@ export class AbilityComponent implements OnInit {
 
   getEffectEntry(): AbilityEffectEntry | null {
     return this.findEffectEntriesByLanguage();
+  }
+
+  getTextEntry(): AbilityFlavorTextEntry | null {
+    return this.findTextEntryByLanguage();
   }
 }

@@ -9,6 +9,7 @@
       <app-name-list [names]="data.names"></app-name-list>
     </ion-col>
   </ion-row>
+  @if (!!effectEntry) {
   <ion-row>
     <ion-col>
       <h3>Effect</h3>
@@ -19,8 +20,7 @@
       <ion-text>{{ effectEntry?.effect }}</ion-text>
     </ion-col>
   </ion-row>
-
-  @if (effectChangeEntries && effectChangeEntries.length) {
+  } @if (effectChangeEntries && effectChangeEntries.length) {
   <ion-row>
     <ion-col>
       <h4>Effect Change Entries</h4>
@@ -29,7 +29,7 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        @for (entry of effectChangeEntries; track entry.effect) {
+        @for (entry of effectChangeEntries; track $index) {
 
         <ion-item lines="full">
           <ion-text>{{ entry.effect }}</ion-text>
@@ -39,6 +39,16 @@
       </ion-list>
     </ion-col>
   </ion-row>
-
+  } @if (textEntry) {
+  <ion-row>
+    <ion-col>
+      <h4>Flavor Text Entries</h4>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-text>{{ textEntry?.flavor_text }}</ion-text>
+    </ion-col>
+  </ion-row>
   }
 </ion-grid>
