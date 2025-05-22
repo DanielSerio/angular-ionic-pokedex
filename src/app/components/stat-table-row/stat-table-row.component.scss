@@ -1,18 +1,19 @@
 ion-row {
   font-size: 0.8em;
+  border-bottom: 1px dotted var(--ion-color-dark);
 }
 
 ion-col {
   &.label {
-    font-weight: 900;
-    opacity: 0.9;
+    font-weight: 700;
+    color: var(--ion-color-light-shade);
   }
 
   &.value {
+    text-align: right;
+
     &.muted {
       opacity: 0.45;
     }
-
-    text-align: right;
   }
 }
