@@ -19,8 +19,11 @@ export class BerryFlavorProfileComponent implements OnInit {
   ngOnInit() {
     this.entries = Object.entries(this.profile);
   }
+  getWidth(n: number) {
+    return ~~(n * 100);
+  }
 
   getWidthStyle(n: number) {
-    return `width: ${n * 100}%`;
+    return `width: ${this.getWidth(n)}%`;
   }
 }

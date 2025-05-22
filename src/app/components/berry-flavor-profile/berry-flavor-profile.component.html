@@ -14,7 +14,7 @@
         <div class="bar" [attr.data-name]="entry[0]">
           <div class="bar-inner" [style]="getWidthStyle(entry[1])"></div>
         </div>
-        <div class="percent">{{ entry[1] * 100 }}%</div>
+        <div class="percent">{{ getWidth(entry[1]) }}%</div>
       </div>
       }
     </ion-col>
