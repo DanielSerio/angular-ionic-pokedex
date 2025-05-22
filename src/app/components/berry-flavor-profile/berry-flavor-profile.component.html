@@ -1,3 +1,22 @@
-<p>
-  {{ profile | json }}
-</p>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h1>Flavors</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      @for (entry of entries; track entry[0]) {
+      <div class="row">
+        <div class="label">
+          <ion-badge color="medium">{{ entry[0] }}</ion-badge>
+        </div>
+        <div class="bar" [attr.data-name]="entry[0]">
+          <div class="bar-inner" [style]="getWidthStyle(entry[1])"></div>
+        </div>
+        <div class="percent">{{ entry[1] * 100 }}%</div>
+      </div>
+      }
+    </ion-col>
+  </ion-row>
+</ion-grid>
