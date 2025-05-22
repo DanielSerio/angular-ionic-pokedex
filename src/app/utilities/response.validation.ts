@@ -75,7 +75,6 @@ export class ResponseValidation {
     const tests = [
       [[casted.id], this.isValidNumberID],
       [[casted.growth_time], this.isValidNumber],
-      [[casted.firmness], this.isValidArray],
       [[casted.flavors], this.isValidArray],
     ] as const;
 

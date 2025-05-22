@@ -11,6 +11,7 @@ import { EggGroupComponent } from "./egg-group/egg-group.component";
 import { ResponseValidation } from '#utilities/response.validation';
 import { AbilityComponent } from './ability/ability.component';
 import { BerryComponent } from './berry/berry.component';
+import { TitleKababPipe } from '#pipes/title-kabab.pipe';
 
 @Component({
   selector: 'app-details-view',
@@ -23,7 +24,8 @@ import { BerryComponent } from './berry/berry.component';
     FormsModule,
     EggGroupComponent,
     AbilityComponent,
-    BerryComponent
+    BerryComponent,
+    TitleKababPipe
   ]
 })
 export class DetailsViewPage implements OnInit, OnDestroy {

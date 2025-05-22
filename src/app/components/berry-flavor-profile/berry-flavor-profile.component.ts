@@ -1,0 +1,17 @@
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-berry-flavor-profile',
+  templateUrl: './berry-flavor-profile.component.html',
+  styleUrls: ['./berry-flavor-profile.component.scss'],
+  standalone: true,
+  imports: [CommonModule]
+})
+export class BerryFlavorProfileComponent implements OnInit {
+  @Input({ required: true }) profile!: Record<string, number>;
+  constructor() { }
+
+  ngOnInit() { }
+
+}
